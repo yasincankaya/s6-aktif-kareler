@@ -5,8 +5,9 @@ const kareIdListesi = ["sqA", "sqB", "sqC", "sqD"];
 
 export default function Kareler() {
   // ADIM 1: State'leri burada tanımlayabilirsin.
+  const [aktifKare, setAktifKare] = React.useState(null);
+  const [kareler, setKareler] = React.useState(kareIdListesi);
 
-  const classAdiAl = (id) => {
     /*
     ADIM 2
     Bu bir click handler değil, JSX içinde kullanılan bir yardımcı(helper) fonksiyondur. (aşağıda kullanımına bakabilirsin)
@@ -14,7 +15,11 @@ export default function Kareler() {
     - Diğer durumlar için boş string dönmeli.
     */
     /* return aktifKare === id ? "active" : ""; */
+
+  const classAdiAl = (id) => {
+    return aktifKare === id ? "active" : "";
   };
+
 
   const aktifEt = (id) => {
     /*
@@ -23,6 +28,7 @@ export default function Kareler() {
     - Eğer tıklanan önceden aktifse, aktifliğini kaldırmalıyız. (aktif kare bilgisini saklayan state'i sıfırlayabiliriz)
     */
     /* setAktifKare(aktifKare === id ? null : id); */
+    setAktifKare(aktifKare === id ? null : id);
   };
 
   /*
@@ -36,15 +42,15 @@ export default function Kareler() {
     <div className="container">
       <h1>Aktif Kare</h1>
       <div className="squares">
-        {/*
-        kareIdListesi.map((id) => (
+        {
+        kareler.map((id) => (
           <div
             key={id}
             data-testid={id}
             className={`square ${classAdiAl(id)}`}
             onClick={() => aktifEt(id)}
           />
-        ))*/}
+        ))}
       </div>
     </div>
   );
